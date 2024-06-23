@@ -24,4 +24,9 @@ jobs:
           pip install beautifulsoup4 slack_sdk python-dotenv
 
       - name: Run main.py
+        env:
+          ID: ${{ secrets.ID }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
         run: python main.py
