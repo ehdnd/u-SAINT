@@ -16,7 +16,7 @@ def send_slack_message(text):
 
         client.chat_postMessage(
             channel=channel_id,
-            text=text
+            text=f"<@태웅>{text}"
         )
     except SlackApiError as e:
         print(f"Slack API error occurred: {e.response['error']}")
