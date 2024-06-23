@@ -16,7 +16,7 @@ def send_slack_message(text):
 
         client.chat_postMessage(
             channel=channel_id,
-            text=f"<@태웅>{text}"
+            text=text
         )
     except SlackApiError as e:
         print(f"Slack API error occurred: {e.response['error']}")
@@ -73,7 +73,7 @@ def run(playwright):
 
         previous_text = None
 
-        messages = []
+        messages = ["==========="]
 
         for span in spans[16:]:
             text = span.text.strip()
@@ -82,9 +82,10 @@ def run(playwright):
                 messages.append(text)
                 previous_text = text
                 if text.isdigit() and len(text) >= 4:
-                    messages.append("========")
+                    messages.append("===========")
         
         if messages:
+            send_slack_message("<!channel> 성적을 불러왔어요")
             send_slack_message("\n".join(messages))
 
     except Exception as e:
