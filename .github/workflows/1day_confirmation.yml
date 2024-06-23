@@ -1,7 +1,8 @@
-name: u_SAINT grade confirmation
-
+name: u_SAINT grade 1day confirmation
 on:
-  workflow_dispatch:
+  schedule:
+    # 매일 UTC 기준으로 00:00에 실행
+    - cron: "0 0 * * *"
 
 jobs:
   run-script:
@@ -14,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
+          python-version: "3.9"
 
       - name: Install dependencies
         run: |
@@ -23,10 +24,10 @@ jobs:
           playwright install
           pip install beautifulsoup4 slack_sdk python-dotenv
 
-      - name: Run main.py
+      - name: Run 1day_confirmation.py
         env:
           ID: ${{ secrets.ID }}
           PASSWORD: ${{ secrets.PASSWORD }}
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
-        run: python main.py
+        run: python 1day_confirmation.py
