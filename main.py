@@ -78,7 +78,7 @@ def run(playwright):
         for span in spans[16:]:
             text = span.text.strip()
 
-            if text != previous_text:
+            if text != previous_text and text != "조회":
                 messages.append(text)
                 previous_text = text
                 if text.isdigit() and len(text) >= 4:
