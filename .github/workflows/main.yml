@@ -1,4 +1,4 @@
-name: Manual Trigger Workflow
+name: u_SAINT grade confirmation
 
 on:
   workflow_dispatch:
