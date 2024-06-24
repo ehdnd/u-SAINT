@@ -106,12 +106,12 @@ def main():
                     break
 
                 current_message = run(page, ID, PASSWORD)
+                if current_message != None:
+                    if previous_message is not None and previous_message != current_message:
+                        send_slack_message("<!channel> 성적 업데이트")
+                        send_slack_message("\n".join(current_message))
 
-                if previous_message is not None and previous_message != current_message:
-                    send_slack_message("<!channel> 성적 업데이트")
-                    send_slack_message("\n".join(current_message))
-
-                previous_message = current_message
+                    previous_message = current_message
                 time.sleep(1800)
                 page.reload()
                 
