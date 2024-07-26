@@ -26,7 +26,7 @@ def run(playwright):
     ID = os.getenv("ID")
     PASSWORD = os.getenv("PASSWORD")
 
-    browser = playwright.chromium.launch(headless=True)
+    browser = playwright.chromium.launch(headless=False)
     
     context = browser.new_context(viewport={"width": 1280, "height": 1280})
     
@@ -45,12 +45,17 @@ def run(playwright):
     
     page.keyboard.press("Enter")
     
+    # page.wait_for_selector('li.c_node > a.depth1.c_nodeA:has-text("학사관리")', timeout=10000)
+    # page.click('li.c_node > a.depth1.c_nodeA:has-text("학사관리")')
+
     page.wait_for_selector('li.c_node > a.depth1.c_nodeA:has-text("학사관리")', timeout=10000)
-    
     page.click('li.c_node > a.depth1.c_nodeA:has-text("학사관리")')
     
-    page.wait_for_selector('li.c_node > a.c_nodeA:has-text("성적/졸업")', timeout=10000)
-    page.click('li.c_node > a.c_nodeA:has-text("성적/졸업")')
+    # page.wait_for_selector('li.c_node > a.c_nodeA:has-text("성적/졸업")', timeout=10000)
+    # page.click('li.c_node > a.c_nodeA:has-text("성적/졸업")')
+    
+    page.wait_for_selector('li.c_node.active > div.depth2_w > ul > li > a.c_nodeA', timeout=10000)
+    page.click('li.c_node.active > div.depth2_w > ul > li > a.c_nodeA:has-text("성적/졸업")')
     
     page.wait_for_load_state('networkidle')
     
@@ -67,7 +72,9 @@ def run(playwright):
 
         soup = BeautifulSoup(html_content, 'html.parser')
 
-        tbody = soup.find("tbody", id="WD0173-contentTBody")
+
+        # id 계속 변경됨
+        tbody = soup.find("tbody", id="WD0192-contentTBody")
 
         spans = tbody.find_all("span")
 
