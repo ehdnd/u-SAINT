@@ -12,7 +12,7 @@ def send_slack_message(text):
     try:
         slack_token = os.getenv("SLACK_TOKEN")
         client = WebClient(token=slack_token)
-        channel_id = os.getenv("CHANNEL_ID")
+        channel_id = os.getenv("GRADE_CHANNEL_ID")
 
         client.chat_postMessage(
             channel=channel_id,
