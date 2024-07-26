@@ -1,4 +1,4 @@
-name: u_SAINT grade dispatch confirmation
+name: u_SAINT scholarship dispatch confirmation
 
 on:
   workflow_dispatch:
@@ -23,10 +23,10 @@ jobs:
           playwright install
           pip install beautifulsoup4 slack_sdk python-dotenv
 
-      - name: Run dispatch_confirmation.py
+      - name: Run scholarship.py
         env:
           ID: ${{ secrets.ID }}
           PASSWORD: ${{ secrets.PASSWORD }}
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
-          GRADE_CHANNEL_ID: ${{ secrets.GRADE_CHANNEL_ID }}
-        run: python u-saint_grade/dispatch_confirmation.py
+          SCHOLARSHIP_CHANNEL_ID: ${{ secrets.SCHOLARSHIP_CHANNEL_ID }}
+        run: python u-saint_scholarship/scholarship.py
