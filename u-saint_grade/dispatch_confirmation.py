@@ -12,7 +12,7 @@ def send_slack_message(text):
     try:
         slack_token = os.getenv("SLACK_TOKEN")  # 환경 변수에서 Slack 토큰 불러오기
         client = WebClient(token=slack_token)
-        channel_id = os.getenv("CHANNEL_ID")  # 환경 변수에서 채널 ID 불러오기
+        channel_id = os.getenv("GRADE_CHANNEL_ID")  # 환경 변수에서 채널 ID 불러오기
 
         client.chat_postMessage(
             channel=channel_id,
