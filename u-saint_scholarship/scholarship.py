@@ -68,16 +68,22 @@ def run(playwright):
 
         tbody = soup.find("tbody", id="WDFD-contentTBody")
 
-        spans = tbody.find_all("span")
-
         previous_text = None
+
+        # 2학기 (sst="1") 인 요소 찾기
+        selected_tr = []
+        for tr in tbody.find_all("tr"):
+            sst_value = int(tr.get('sst', -1))
+            if sst_value == 1:
+                selected_tr.append(tr)
 
         # cc가 2부터 8인 <td> 요소 찾기
         selected_td = []
-        for td in tbody.find_all("td"):
-            cc_value = int(td.get('cc', -1))
-            if 2 <= cc_value <= 8:
-                selected_td.append(td)
+        for tr in selected_tr:
+            for td in tr.find_all("td"):  # 각 <tr> 내부의 <td> 요소를 찾아야 합니다.
+                cc_value = int(td.get('cc', -1))
+                if 2 <= cc_value <= 8:
+                    selected_td.append(td)
 
         # 선택된 <td> 요소의 <span> 요소 가져오기
         a = []
