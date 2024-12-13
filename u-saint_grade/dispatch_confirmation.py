@@ -26,7 +26,7 @@ def run(playwright):
     ID = os.getenv("ID")
     PASSWORD = os.getenv("PASSWORD")
 
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch(headless=True)
     
     context = browser.new_context(viewport={"width": 1280, "height": 1280})
     
