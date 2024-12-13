@@ -90,7 +90,7 @@ def main():
     duration = 24 * 60 * 60
 
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=True)
+        browser = playwright.chromium.launch(headless=False)
         context = browser.new_context(viewport={"width": 1280, "height": 1280})
         page = context.new_page()
 
