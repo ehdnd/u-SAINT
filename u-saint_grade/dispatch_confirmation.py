@@ -26,7 +26,7 @@ def run(playwright):
     ID = os.getenv("ID")
     PASSWORD = os.getenv("PASSWORD")
 
-    browser = playwright.chromium.launch(headless=True)
+    browser = playwright.chromium.launch(headless=False)
     
     context = browser.new_context(viewport={"width": 1280, "height": 1280})
     
@@ -61,10 +61,10 @@ def run(playwright):
     
     iframe = page.frame(name="isolatedWorkArea")
 
-    # 여기만 바꿔주면 됩니다.
     try:
         iframe.wait_for_selector(".lsButton--design-previous", timeout=10000)
-        iframe.click(".lsButton--design-previous")
+        # 이전 버튼
+        # iframe.click(".lsButton--design-previous")
 
         time.sleep(5)
 
@@ -74,7 +74,7 @@ def run(playwright):
 
 
         # id 계속 변경됨
-        tbody = soup.find("tbody", id="WD0192-contentTBody")
+        tbody = soup.find("tbody", id="WD0188-contentTBody")
 
         spans = tbody.find_all("span")
 
