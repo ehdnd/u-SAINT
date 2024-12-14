@@ -16,11 +16,27 @@ class Scraper:
         page.fill('input[placeholder="비밀번호를 입력하세요"]', self.password)
         page.keyboard.press("Enter")
 
-    def fetch_page_content(self, page, selector, iframe_name=None):
-        page.wait_for_selector(selector, timeout=10000)
-        page.click(selector)
+    # def fetch_page_content(self, page, selector, iframe_name=None):
+    #     page.wait_for_selector(selector, timeout=10000)
+    #     page.click(selector)
+    #     page.wait_for_load_state("networkidle")
+    #     if iframe_name:
+    #         iframe = page.frame(name=iframe_name)
+    #         return iframe.content()
+    #     return page.content()
+
+    def fetch_page_content(
+        self, page, selectors, isPrev, iframe_name="isolatedWorkArea"
+    ):
+        for selector in selectors:
+            page.wait_for_selector(selector, timeout=10000)
+            page.click(selector)
+
         page.wait_for_load_state("networkidle")
-        if iframe_name:
-            iframe = page.frame(name=iframe_name)
-            return iframe.content()
-        return page.content()
+
+        iframe = page.frame(name=iframe_name)
+        if isPrev:
+            iframe.wait_for_selector(".lsButton--design-previous", timeout=10000)
+            iframe.click(".lsButton--design-previous")
+
+        return iframe.content()
