@@ -29,4 +29,4 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
           GRADE_CHANNEL_ID: ${{ secrets.GRADE_CHANNEL_ID }}
-        run: python u-saint_grade/dispatch_confirmation.py
+        run: python main.py
