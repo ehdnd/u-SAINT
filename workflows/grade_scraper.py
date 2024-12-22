@@ -44,9 +44,7 @@ def grade_scraper():
                 'li.c_node > a.depth1.c_nodeA:has-text("학사관리")',
                 'li.c_node.active > div.depth2_w > ul > li > a.c_nodeA:has-text("성적/졸업")',
             ]
-            content = scraper.fetch_page_content(
-                page, selectors=selectors, isPrev=False
-            )
+            content = scraper.fetch_page_content(page, selectors=selectors, isPrev=True)
 
             soup = BeautifulSoup(content, "html.parser")
             tbody = soup.find("tbody", id="WD0188-contentTBody")
