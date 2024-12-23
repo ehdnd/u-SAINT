@@ -39,4 +39,7 @@ class Scraper:
             iframe.wait_for_selector(".lsButton--design-previous", timeout=10000)
             iframe.click(".lsButton--design-previous")
 
+        # page.wait_for_load_state("networkidle")
+        time.sleep(5)
+
         return iframe.content()

@@ -23,7 +23,7 @@ def make_message(spans: list):
     return message
 
 
-def grade_scraper():
+def grade_scraper(tbody_id: str):
     ID = os.getenv("ID")
     PASSWORD = os.getenv("PASSWORD")
     SLACK_TOKEN = os.getenv("SLACK_TOKEN")
@@ -35,6 +35,7 @@ def grade_scraper():
     with sync_playwright() as p:
         scraper = Scraper(ID, PASSWORD)
         browser = p.chromium.launch(headless=True)
+        # browser = p.chromium.launch(headless=False)
         context = browser.new_context()
         page = context.new_page()
 
@@ -47,7 +48,7 @@ def grade_scraper():
             content = scraper.fetch_page_content(page, selectors=selectors, isPrev=True)
 
             soup = BeautifulSoup(content, "html.parser")
-            tbody = soup.find("tbody", id="WD0188-contentTBody")
+            tbody = soup.find("tbody", id=tbody_id)
             spans = tbody.find_all("span")
 
             messages = make_message(spans)
